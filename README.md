@@ -1,1 +1,6 @@
 # Assignment 9 GAM531
+## Introduction
+This OpenTK-based 3D game simulates a first-person environment where a blue player capsule navigates a scene with gray walls, a black door that toggles open/closed via the 'E' key when nearby (rotating smoothly around a hinge on the Y-axis), a green target wall for ball bouncing, and a grid of 32 brown breakable boxes. The player moves with WASD keys using mouse-look for camera direction, while Spacebar throws white spherical balls forward with a 0.5-second cooldown, applying gravity and ground bouncing with damping. In the update loop, collision detection via AABB and sphere colliders prevents player overlap with active objects, removes balls upon hitting boxes (disabling them), and reflects ball velocity on target impact; rendering occurs each frame using a textured cube VAO for objects and a plane for the ground, with a Blinn-Phong shader handling ambient, diffuse, and specular lighting from a fixed overhead source, all projected in perspective view and cleared with depth testing for efficient OpenGL drawing.
+
+## Challenges faced
+The main issue was that the boxes were not registering hits, which stemmed from the fact that the collider's bounds had to be synchronized with the object's world position. The fix involved addiing the UpdateColliderBounds helper method and calling it every frame in OnUpdateFrame.
