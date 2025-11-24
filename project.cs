@@ -336,7 +336,14 @@ namespace Windows_Engine
                         }
                     }
                 }
-
+             
+                if (!collided && target.IsActive)
+                {
+                    if (target.Collider!.Intersects(playerBox))
+                    {
+                        collided = true;
+                    }
+                }
                 if (!collided && door.IsActive && !door.IsOpen) // Only check door if it's closed
                 {
                     if (door.Collider!.Intersects(playerBox))
